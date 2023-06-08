@@ -12,7 +12,9 @@ load_dotenv()                    #for python-dotenv method
 
 
 
-MY_API_KEY = os.environ.get(API_KEY)
+MY_API_KEY = os.environ.get('API_KEY')
 twoCaptcha = TwoCaptcha(MY_API_KEY)
-recaptcha_token = twoCaptcha.solve_recaptcha(site_url=SITE_URL, site_key=SITE_KEY)
+recaptcha_token = twoCaptcha.solve_recaptcha(
+    site_url=SITE_URL, 
+    site_key=SITE_KEY)
 
