@@ -1,16 +1,18 @@
+SITE_URL = "https://dashboard.easyleadz.com/elogin"
+SITE_KEY = "6LdZ2ygTAAAAABH_7I9mj2AvLYbr6SXbq3sMbcH2"
+
+
 import os
 
-API_KEY = os.environ.get(API_KEY)
-SITE_URL = ""
-SITE_KEY = ""
-
-
 from twocaptcha import TwoCaptcha
+from dotenv import load_dotenv   #for python-dotenv method
+load_dotenv()                    #for python-dotenv method
 
 
-result = solver.recaptcha(sitekey='6Le-wvkSVVABCPBMRTvw0Q4Muexq1bi0DJwx_mJ-',
-  url='https://mysite.com/page/with/recaptcha',
-  version='v3',
-  param1=...)
-  
+
+
+
+MY_API_KEY = os.environ.get(API_KEY)
+twoCaptcha = TwoCaptcha(MY_API_KEY)
+recaptcha_token = twoCaptcha.solve_recaptcha(site_url=SITE_URL, site_key=SITE_KEY)
 
