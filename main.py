@@ -8,7 +8,7 @@ import os
 import time
 
 # Local Libraries 
-from recaptcha import captcharesolver
+from recaptcha import captcha_resolver
 
 # Third Party Libraries
 import pandas as pd
@@ -41,7 +41,8 @@ if WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it(
     (By.CSS_SELECTOR,"iframe[title='reCAPTCHA']"))) == True:
     # WebDriverWait(driver, 20).until(EC.element_to_be_clickable(
     #     (By.CSS_SELECTOR, "div.recaptcha-checkbox-border"))).click()
-    captcharesolver()
+    captcha_resolver(driver)
+    
     # driver.execute_script("""document.querySelector('[name="g-recaptcha-response"]').innerText='{}'""".format(final_req))
     
 else:
