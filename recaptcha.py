@@ -3,20 +3,27 @@ SITE_KEY = "6LdZ2ygTAAAAABH_7I9mj2AvLYbr6SXbq3sMbcH2"
 REQUEST_URL = "http://2captcha.com/in.php"
 RESPONSE_URL = "http://2captcha.com/res.php"
 
-
+# Local Libraries
 import os
 import sys
 import time
 
+# Third Party Libraries
 import requests
 from twocaptcha import TwoCaptcha
 from dotenv import load_dotenv   #for python-dotenv method
 load_dotenv()                    #for python-dotenv method
 MY_API_KEY = os.environ.get('API_KEY')
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 """Captcha Resolver for v2"""
-def captcharesolver():
+def captcha_resolver(driver):
     solver = TwoCaptcha(MY_API_KEY)
 
     try:
@@ -55,5 +62,3 @@ def captcharesolver():
         
         final_req = full_request_solution.text
         final_request_solution = final_req.split("|")[1]
-        print(final_request_solution)
-        
