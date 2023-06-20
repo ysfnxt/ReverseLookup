@@ -10,6 +10,7 @@ path = os.path.dirname(os.path.abspath(CHROME_DRIVER))
 
 # Local Libraries 
 from recaptcha import recaptcha_response
+from scrape_leads import leads_scraper
 
 
 # Third Party Libraries
