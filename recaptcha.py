@@ -26,6 +26,17 @@ from selenium.webdriver.common.by import By
 
 
 
+"""Captcha Resolver Function using Selenium and 2captcha API. 
+1. Get the API key from 2Captcha API 
+2. Find data-sitekey parameter.
+3. Submit a HTTP GET request to API URL: http://2captcha.com/in.php 
+If everything is fine server will return the ID of your captcha as plain text, 
+like: OK|2122988149
+4. Make a 15 timeout then submit a HTTP GET request to API URL: 
+http://2captcha.com/res.php and get the result.
+5. Execute a script to input the result and submit the form
+"""
+
 def recaptcha_response(driver):
     solver = TwoCaptcha(api_key)
     try:
@@ -54,6 +65,7 @@ def recaptcha_response(driver):
 
         captcha_id = str(result['captchaId'])
         
+        # Get the Token Captcha 
         result_response = "http://2captcha.com/res.php?key={}&action=get&id={}\
             ".format(api_key,captcha_id)
       
@@ -61,12 +73,15 @@ def recaptcha_response(driver):
 
         while True:
             time.sleep(10)
+            # Sending a GET request for the captcha result 
             response = requests.get(result_response)
 
             if response.text[0:2] == 'OK':
                 break
         captcha_results = response.text[3:]
         
+
+        # set the value of g-recaptcha-response
         driver.execute_script("""
         document.querySelector('[name="g-recaptcha-response"]').innerText='{}'\
             """.format(captcha_results))
